@@ -2,7 +2,7 @@
 {
     public class Dollar
     {
-        public double ExchangeRate
+        public double Rate
         {
             get;
             private set;
@@ -15,12 +15,12 @@
 
         public Dollar(double rate)
         {
-            ExchangeRate = rate;
+            Rate = rate;
         }
 
         public double ConvertDollars(double dollarsAmount)
         {
-            var amount = dollarsAmount * ExchangeRate;
+            var amount = dollarsAmount * Rate;
 
             return amount;
         }
@@ -34,7 +34,7 @@
 
         public double ConvertToDollars(double amount)
         {
-            var dollarsAmount = amount / ExchangeRate;
+            var dollarsAmount = amount / Rate;
 
             return dollarsAmount;
         }
