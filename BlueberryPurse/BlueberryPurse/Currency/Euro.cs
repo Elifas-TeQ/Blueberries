@@ -8,24 +8,24 @@ namespace BlueberryPurse.Currency
 {
     public class Euro
     {
-        private double moneyCount;
-        private double exchangeCourse;
+        private double moneyValue;
+        private double exchangeCourseRelativelyHryvnia;
 
         public Euro()
         {
-            moneyCount = 0.0;
-            exchangeCourse = 0.0;
+            moneyValue = 0.0;
+            exchangeCourseRelativelyHryvnia = 0.0;
         }
 
         public Euro(double count, double course)
         {
-            moneyCount = count;
-            exchangeCourse = course;
+            moneyValue = count;
+            exchangeCourseRelativelyHryvnia = course;
         }
 
-        public double ConvertEuro(Euro count)
+        public double ConvertEuroToHryvnia(Euro count)
         {
-            return count.moneyCount * count.exchangeCourse;
+            return count.moneyValue * count.exchangeCourseRelativelyHryvnia;
         }
 
     }

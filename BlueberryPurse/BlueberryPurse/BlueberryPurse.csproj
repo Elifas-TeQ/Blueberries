@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Currency\Dollar.cs" />
     <Compile Include="Currency\Euro.cs" />
+    <Compile Include="Currency\Hryvnia.cs" />
     <Compile Include="Currency\Pound.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
