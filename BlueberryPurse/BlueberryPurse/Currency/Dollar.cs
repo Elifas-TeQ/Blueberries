@@ -13,9 +13,9 @@
         {
         }
 
-        public Dollar(double exchangeRate)
+        public Dollar(double rate)
         {
-            ExchangeRate = exchangeRate;
+            ExchangeRate = rate;
         }
 
         public double ConvertDollars(double dollarsAmount)
