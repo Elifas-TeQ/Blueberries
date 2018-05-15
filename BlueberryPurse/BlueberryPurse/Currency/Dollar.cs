@@ -20,7 +20,7 @@
 
         public double ConvertDollars(double dollarsAmount)
         {
-            var amount = dollarsAmount * Rate;
+            var amount = Rate * dollarsAmount;
 
             return amount;
         }
