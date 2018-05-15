@@ -20,9 +20,9 @@
 
         public double ConvertDollars(double dollarsAmount)
         {
-            var count = dollarsAmount * Rate;
+            var amount = Rate * dollarsAmount;
 
-            return count;
+            return amount;
         }
 
         public double ConvertDollars(double dollarsAmount, double exchangeRate)
