@@ -35,9 +35,7 @@
         public double ConvertToDollars(double amount)
         {
             var dollarsAmount = amount / Rate;
-            //some changes
 
-            //and so on..
             return dollarsAmount;
         }
 
