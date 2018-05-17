@@ -111,7 +111,7 @@ namespace CalcClass
 
             if (!couldBeMinValue)
             {
-                isNotInRange |= number <= int.MinValue;
+                isNotInRange |= number == int.MinValue;
             }
             
             if (isNotInRange)
