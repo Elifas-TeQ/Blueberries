@@ -15,6 +15,7 @@ namespace BlueberryCalculator
             Application.SetCompatibleTextRenderingDefault(false);
             //TODO: Run the form of calculator below.
             //Application.Run(/* new CalculatorForm() */);
+            Application.Run(new CalcForm());
         }
     }
 }
