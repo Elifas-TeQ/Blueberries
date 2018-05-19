@@ -16,10 +16,5 @@ namespace BlueberryCalculator
         {
             InitializeComponent();
         }
-
-        private void CalcForm_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

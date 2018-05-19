@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBoxExpression = new System.Windows.Forms.TextBox();
+            this.textBoxResult = new System.Windows.Forms.TextBox();
             this.buttonZero = new System.Windows.Forms.Button();
             this.buttonNegate = new System.Windows.Forms.Button();
             this.buttonMod = new System.Windows.Forms.Button();
@@ -56,29 +56,29 @@
             this.button8 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // textBox1
+            // textBoxExpression
             // 
-            this.textBox1.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox1.Location = new System.Drawing.Point(29, 19);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(314, 102);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxExpression.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.textBoxExpression.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxExpression.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxExpression.Location = new System.Drawing.Point(29, 19);
+            this.textBoxExpression.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.textBoxExpression.Multiline = true;
+            this.textBoxExpression.Name = "textBoxExpression";
+            this.textBoxExpression.Size = new System.Drawing.Size(314, 102);
+            this.textBoxExpression.TabIndex = 0;
+            this.textBoxExpression.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // textBox2
+            // textBoxResult
             // 
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Location = new System.Drawing.Point(29, 120);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(314, 51);
-            this.textBox2.TabIndex = 1;
+            this.textBoxResult.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxResult.Location = new System.Drawing.Point(29, 120);
+            this.textBoxResult.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.textBoxResult.Multiline = true;
+            this.textBoxResult.Name = "textBoxResult";
+            this.textBoxResult.ReadOnly = true;
+            this.textBoxResult.Size = new System.Drawing.Size(314, 51);
+            this.textBoxResult.TabIndex = 1;
             // 
             // buttonZero
             // 
@@ -423,13 +423,12 @@
             this.Controls.Add(this.buttonMod);
             this.Controls.Add(this.buttonNegate);
             this.Controls.Add(this.buttonZero);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxResult);
+            this.Controls.Add(this.textBoxExpression);
             this.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.Name = "CalcForm";
             this.Text = "BlueberriesCalc";
-            this.Load += new System.EventHandler(this.CalcForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -437,8 +436,8 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBoxExpression;
+        private System.Windows.Forms.TextBox textBoxResult;
         private System.Windows.Forms.Button buttonZero;
         private System.Windows.Forms.Button buttonNegate;
         private System.Windows.Forms.Button buttonMod;
