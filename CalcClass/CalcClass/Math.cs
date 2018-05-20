@@ -48,7 +48,8 @@ namespace CalcClass
 
             return HandleBinaryOperation(a, b, () =>
             {
-                SystemMath.DivRem(a, b, out long result);
+                long result;
+                SystemMath.DivRem(a, b, out result);
 
                 return result;
             });
