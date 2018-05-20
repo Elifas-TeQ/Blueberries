@@ -1,5 +1,6 @@
-﻿using System;
+﻿using CalcClass;
 using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 
 namespace AnalaizerClass
@@ -7,6 +8,8 @@ namespace AnalaizerClass
     public class Brain
     {
         private static string buffer = string.Empty;
+
+        private static ArrayList bufferStack = new ArrayList();
 
         private static int erposition = 0;
 
@@ -158,20 +161,147 @@ namespace AnalaizerClass
         
         public static ArrayList CreateStack()
         {
-            //TODO: implement.
-            return new ArrayList();
+            var output = new ArrayList();
+
+            var stack = new Stack<string>();
+
+            var tokens = buffer.Split(' ');
+
+            for (int i = 0; i < tokens.Length; i++)
+            {
+                long number;
+                if (long.TryParse(tokens[i], out number))
+                {
+                    output.Add(number);
+
+                    continue;
+                }
+
+                int tokenOperatorPriority;
+                if(IsOperator(tokens[i], out tokenOperatorPriority))
+                {
+                    int stackOperatorPriority;
+                    while(IsOperator(stack.Peek(), out stackOperatorPriority))
+                    {
+                        if (stackOperatorPriority > tokenOperatorPriority)
+                        {
+                            stack.Push(tokens[i]);
+
+                            break;
+                        }
+                        else
+                        {
+                            output.Add(stack.Pop());
+                        }
+                    }
+
+                    continue;
+                }
+
+                if (tokens[i] == "(")
+                {
+                    stack.Push(tokens[i]);
+
+                    continue;
+                }
+
+                if (tokens[i] == ")")
+                {
+                    while (stack.Peek() != "(")
+                    {
+                        output.Add(stack.Pop());
+                    }
+
+                    stack.Pop();
+                }
+            }
+
+            if (stack.Count > 0)
+            {
+                output.Add(stack.Pop());
+            }
+
+            return output;
         }
 
         public static string RunEstimate()
         {
-            //TODO: implement.
-            return string.Empty;
+            var stack = new Stack<long>();
+
+            for (int i = 0; i < bufferStack.Count; i++)
+            {
+                var element = bufferStack[i].ToString();
+
+                long number;
+                if (long.TryParse(element, out number))
+                {
+                    stack.Push(number);
+                }
+                else
+                // If element is unary operator.
+                if (element == "p" || element == "m")
+                {
+                    var result = ExecuteUnaryOperator(element, stack.Pop());
+
+                    stack.Push(result);
+                }
+                else
+                // If element is binary operator.
+                if (element == "+" || element == "-" || element == "*" || element == "/" || element == "mod")
+                {
+                    var rightOperand = stack.Pop();
+
+                    var result = ExecuteBinaryOperator(element, stack.Pop(), rightOperand);
+
+                    stack.Push(result);
+                }
+            }
+            
+            return stack.Pop().ToString();
+        }
+
+        private static int ExecuteUnaryOperator(string element, long input)
+        {
+            // There are only two unary operators: "m" and "p".
+            var result = element == "m"
+                ? Math.IABS(input)
+                : Math.ABS(input);
+
+            return result;
+        }
+
+        private static int ExecuteBinaryOperator(string element, long leftOperand, long rightOperand)
+        {
+            int result = 0;
+
+            switch (element)
+            {
+                case "+":
+                    result = Math.Add(leftOperand, rightOperand);
+                    break;
+
+                case "-":
+                    result = Math.Sub(leftOperand, rightOperand);
+                    break;
+
+                case "*":
+                    result = Math.Mult(leftOperand, rightOperand);
+                    break;
+
+                case "/":
+                    result = Math.Div(leftOperand, rightOperand);
+                    break;
+
+                case "mod":
+                    result = Math.Mod(leftOperand, rightOperand);
+                    break;
+            }
+            
+            return result;
         }
 
         public static string Estimate()
         {
-            //TODO: implement it in the order below.
-
             var isValid = CheckCurrency();
 
             if (!isValid)
@@ -188,11 +318,11 @@ namespace AnalaizerClass
                 return buffer;
             }
 
-            var stack = CreateStack();
+            bufferStack = CreateStack();
 
-            var estimatedResult = RunEstimate();
+            result = RunEstimate();
 
-            return string.Empty;
+            return result;
         }
         #endregion
         
@@ -266,6 +396,44 @@ namespace AnalaizerClass
                 || symbol == 'm';
 
             return isUnaryOperator;
+        }
+
+        private static bool IsOperator(string token, out int priority)
+        {
+            var isOperator = token == "p"
+                || token == "m";
+
+            if (isOperator)
+            {
+                priority = 1;
+
+                return true;
+            }
+
+            isOperator = token == "*"
+                || token == "/"
+                || token == "mod";
+
+            if (isOperator)
+            {
+                priority = 2;
+
+                return true;
+            }
+
+            isOperator = token == "+"
+                || token == "-";
+
+            if (isOperator)
+            {
+                priority = 3;
+
+                return true;
+            }
+
+            priority = 0;
+
+            return false;
         }
 
         #region Symbol processors
