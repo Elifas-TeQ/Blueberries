@@ -62,7 +62,7 @@
             this.textBoxExpression.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxExpression.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxExpression.Location = new System.Drawing.Point(29, 19);
-            this.textBoxExpression.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.textBoxExpression.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxExpression.MaxLength = 66000;
             this.textBoxExpression.Multiline = true;
             this.textBoxExpression.Name = "textBoxExpression";
@@ -75,7 +75,7 @@
             this.textBoxResult.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxResult.Enabled = false;
             this.textBoxResult.Location = new System.Drawing.Point(29, 120);
-            this.textBoxResult.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.textBoxResult.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxResult.Multiline = true;
             this.textBoxResult.Name = "textBoxResult";
             this.textBoxResult.ReadOnly = true;
@@ -136,6 +136,7 @@
             this.buttonEqual.TabIndex = 6;
             this.buttonEqual.Text = "=";
             this.buttonEqual.UseVisualStyleBackColor = false;
+            this.buttonEqual.Click += new System.EventHandler(this.buttonEqual_Click);
             // 
             // buttonOne
             // 
@@ -432,7 +433,8 @@
             this.Controls.Add(this.textBoxResult);
             this.Controls.Add(this.textBoxExpression);
             this.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.KeyPreview = true;
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.MaximizeBox = false;
             this.Name = "CalcForm";
             this.Text = "BlueberriesCalc";

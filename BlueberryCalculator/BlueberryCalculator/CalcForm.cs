@@ -43,7 +43,10 @@ namespace BlueberryCalculator
 
         protected void deleteLastSymbol()
         {
-            textBoxExpression.Text = textBoxExpression.Text.Remove(textBoxExpression.Text.Length - 1, 1);
+            if (textBoxExpression.Text.EndsWith("mod"))
+                textBoxExpression.Text = textBoxExpression.Text.Remove(textBoxExpression.Text.Length - 3, 3);
+            else textBoxExpression.Text = textBoxExpression.Text.Remove(textBoxExpression.Text.Length - 1, 1);
+            
         }
 
         private void buttonBackspace_Click(object sender, EventArgs e)
@@ -104,5 +107,41 @@ namespace BlueberryCalculator
                 clickTimeSpan.Start();
             }
         }
+
+    
+
+        private void buttonEqual_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(":P");
+
+        }
+        
+        protected override bool ProcessCmdKey(ref Message message, Keys keys)
+        {
+            switch (keys)
+            {
+                case Keys.Escape:
+                    {
+                        this.Close();
+                        return true;
+                    }
+                case Keys.Enter:
+                    {
+                        buttonEqual_Click(this, null);
+                        return true;
+                    }
+            }
+            return base.ProcessCmdKey(ref message, keys);
+        }
+        
+        /*
+         private void CalcForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
+        }
+         */
     }
 }
