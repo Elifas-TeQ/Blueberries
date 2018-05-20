@@ -47,13 +47,13 @@
             this.buttonNine = new System.Windows.Forms.Button();
             this.buttonMultiply = new System.Windows.Forms.Button();
             this.buttonDivide = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonBackspace = new System.Windows.Forms.Button();
             this.buttonCloseParenthesis = new System.Windows.Forms.Button();
             this.buttonOpenParenthesis = new System.Windows.Forms.Button();
             this.buttonMemoryRecall = new System.Windows.Forms.Button();
             this.buttonMemoryAdd = new System.Windows.Forms.Button();
             this.buttonMemoryClear = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
+            this.buttonClear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBoxExpression
@@ -63,6 +63,7 @@
             this.textBoxExpression.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxExpression.Location = new System.Drawing.Point(29, 19);
             this.textBoxExpression.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.textBoxExpression.MaxLength = 66000;
             this.textBoxExpression.Multiline = true;
             this.textBoxExpression.Name = "textBoxExpression";
             this.textBoxExpression.Size = new System.Drawing.Size(314, 102);
@@ -72,6 +73,7 @@
             // textBoxResult
             // 
             this.textBoxResult.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxResult.Enabled = false;
             this.textBoxResult.Location = new System.Drawing.Point(29, 120);
             this.textBoxResult.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.textBoxResult.Multiline = true;
@@ -79,6 +81,7 @@
             this.textBoxResult.ReadOnly = true;
             this.textBoxResult.Size = new System.Drawing.Size(314, 51);
             this.textBoxResult.TabIndex = 1;
+            this.textBoxResult.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // buttonZero
             // 
@@ -105,6 +108,7 @@
             this.buttonNegate.TabIndex = 4;
             this.buttonNegate.Text = "±";
             this.buttonNegate.UseVisualStyleBackColor = false;
+            this.buttonNegate.Click += new System.EventHandler(this.buttonNegate_Click);
             // 
             // buttonMod
             // 
@@ -302,18 +306,19 @@
             this.buttonDivide.Text = "÷";
             this.buttonDivide.UseVisualStyleBackColor = false;
             // 
-            // button2
+            // buttonBackspace
             // 
-            this.button2.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Century Gothic", 15F);
-            this.button2.Location = new System.Drawing.Point(29, 242);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(74, 49);
-            this.button2.TabIndex = 20;
-            this.button2.Text = "⌫";
-            this.button2.UseVisualStyleBackColor = false;
+            this.buttonBackspace.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.buttonBackspace.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.buttonBackspace.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonBackspace.Font = new System.Drawing.Font("Century Gothic", 15F);
+            this.buttonBackspace.Location = new System.Drawing.Point(29, 241);
+            this.buttonBackspace.Name = "buttonBackspace";
+            this.buttonBackspace.Size = new System.Drawing.Size(74, 49);
+            this.buttonBackspace.TabIndex = 20;
+            this.buttonBackspace.Text = "⌫";
+            this.buttonBackspace.UseVisualStyleBackColor = false;
+            this.buttonBackspace.Click += new System.EventHandler(this.buttonBackspace_Click);
             // 
             // buttonCloseParenthesis
             // 
@@ -334,7 +339,7 @@
             this.buttonOpenParenthesis.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.buttonOpenParenthesis.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOpenParenthesis.Font = new System.Drawing.Font("Century Gothic", 13F);
-            this.buttonOpenParenthesis.Location = new System.Drawing.Point(109, 243);
+            this.buttonOpenParenthesis.Location = new System.Drawing.Point(109, 242);
             this.buttonOpenParenthesis.Name = "buttonOpenParenthesis";
             this.buttonOpenParenthesis.Size = new System.Drawing.Size(74, 49);
             this.buttonOpenParenthesis.TabIndex = 22;
@@ -380,18 +385,19 @@
             this.buttonMemoryClear.Text = "MC";
             this.buttonMemoryClear.UseVisualStyleBackColor = false;
             // 
-            // button8
+            // buttonClear
             // 
-            this.button8.BackColor = System.Drawing.Color.SlateBlue;
-            this.button8.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Font = new System.Drawing.Font("Century Gothic", 12F);
-            this.button8.Location = new System.Drawing.Point(29, 193);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(74, 37);
-            this.button8.TabIndex = 26;
-            this.button8.Text = "C";
-            this.button8.UseVisualStyleBackColor = false;
+            this.buttonClear.BackColor = System.Drawing.Color.SlateBlue;
+            this.buttonClear.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.buttonClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonClear.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.buttonClear.Location = new System.Drawing.Point(29, 193);
+            this.buttonClear.Name = "buttonClear";
+            this.buttonClear.Size = new System.Drawing.Size(74, 37);
+            this.buttonClear.TabIndex = 26;
+            this.buttonClear.Text = "C";
+            this.buttonClear.UseVisualStyleBackColor = false;
+            this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
             // 
             // CalcForm
             // 
@@ -399,13 +405,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSlateBlue;
             this.ClientSize = new System.Drawing.Size(373, 536);
-            this.Controls.Add(this.button8);
+            this.Controls.Add(this.buttonClear);
             this.Controls.Add(this.buttonMemoryClear);
             this.Controls.Add(this.buttonMemoryAdd);
             this.Controls.Add(this.buttonMemoryRecall);
             this.Controls.Add(this.buttonOpenParenthesis);
             this.Controls.Add(this.buttonCloseParenthesis);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.buttonBackspace);
             this.Controls.Add(this.buttonDivide);
             this.Controls.Add(this.buttonMultiply);
             this.Controls.Add(this.buttonNine);
@@ -427,6 +433,7 @@
             this.Controls.Add(this.textBoxExpression);
             this.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.MaximizeBox = false;
             this.Name = "CalcForm";
             this.Text = "BlueberriesCalc";
             this.ResumeLayout(false);
@@ -455,12 +462,12 @@
         private System.Windows.Forms.Button buttonNine;
         private System.Windows.Forms.Button buttonMultiply;
         private System.Windows.Forms.Button buttonDivide;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonBackspace;
         private System.Windows.Forms.Button buttonCloseParenthesis;
         private System.Windows.Forms.Button buttonOpenParenthesis;
         private System.Windows.Forms.Button buttonMemoryRecall;
         private System.Windows.Forms.Button buttonMemoryAdd;
         private System.Windows.Forms.Button buttonMemoryClear;
-        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button buttonClear;
     }
 }
