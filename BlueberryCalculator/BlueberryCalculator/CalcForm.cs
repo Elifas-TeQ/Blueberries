@@ -89,7 +89,8 @@ namespace BlueberryCalculator
                                 : textBoxExpression.Text.Substring(0, textBoxExpression.Text.Length - 1) + "m";
                         */                
                     }
-                    clickTimeSpan.Start();
+                    //clickTimeSpan.Start();
+                    clickTimeSpan = Stopwatch.StartNew();
                 }
                 else
                 {
