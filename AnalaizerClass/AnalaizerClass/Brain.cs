@@ -71,11 +71,11 @@ namespace AnalaizerClass
 
             var isLastSpaceWritten = false;
 
-            for (int i = 0; i < buffer.Length; i++)
+            for (int i = 0; i < expression.Length; i++)
             {
                 var isError = false;
 
-                lastReadSymbolType = RecogniseSymbolType(buffer, i);
+                lastReadSymbolType = RecogniseSymbolType(expression, i);
 
                 switch (lastReadSymbolType)
                 {
@@ -88,28 +88,28 @@ namespace AnalaizerClass
 
 
                     case SymbolType.Number:
-                        ProcessNumberDetected(buffer, i, outputBuilder,
+                        ProcessNumberDetected(i, outputBuilder,
                             ref lastWrittenSymbolType, ref isLastSpaceWritten, ref isError);
 
                         break;
 
 
                     case SymbolType.UnaryOperator:
-                        ProcessUnaryOperatorDetected(buffer, i, outputBuilder,
+                        ProcessUnaryOperatorDetected(i, outputBuilder,
                             ref lastWrittenSymbolType, ref isLastSpaceWritten, ref isError);
 
                         break;
 
 
                     case SymbolType.BinaryOperator:
-                        ProcessBinaryOperatorDetected(buffer, i, outputBuilder,
+                        ProcessBinaryOperatorDetected(i, outputBuilder,
                             ref lastWrittenSymbolType, ref isLastSpaceWritten, ref isError);
 
                         break;
 
 
                     case SymbolType.ModOperator:
-                        ProcessModOperatorDetected(buffer, i, outputBuilder,
+                        ProcessModOperatorDetected(i, outputBuilder,
                             ref lastWrittenSymbolType, ref isLastSpaceWritten, ref isError);
 
                         // After incrementation in for-loop, 'mod' must be behind index 'i'.
@@ -119,21 +119,21 @@ namespace AnalaizerClass
 
 
                     case SymbolType.OpeningBracket:
-                        ProcessOpeningBracketDetected(buffer, i, outputBuilder,
+                        ProcessOpeningBracketDetected(i, outputBuilder,
                             ref lastWrittenSymbolType, ref isLastSpaceWritten, ref isError);
 
                         break;
 
 
                     case SymbolType.ClosingBracket:
-                        ProcessClosingBracketDetected(buffer, i, outputBuilder,
+                        ProcessClosingBracketDetected(i, outputBuilder,
                             ref lastWrittenSymbolType, ref isLastSpaceWritten, ref isError);
 
                         break;
 
 
                     case SymbolType.Space:
-                        ProcessSpaceDetected(buffer, i, outputBuilder,
+                        ProcessSpaceDetected(i, outputBuilder,
                             lastWrittenSymbolType, ref isLastSpaceWritten);
 
                         break;
@@ -260,106 +260,76 @@ namespace AnalaizerClass
             return stack.Pop().ToString();
         }
 
-        private static int ExecuteUnaryOperator(string element, long input)
-        {
-            // There are only two unary operators: "m" and "p".
-            var result = element == "m"
-                ? Math.IABS(input)
-                : Math.ABS(input);
-
-            return result;
-        }
-
-        private static int ExecuteBinaryOperator(string element, long leftOperand, long rightOperand)
-        {
-            int result = 0;
-
-            switch (element)
-            {
-                case "+":
-                    result = Math.Add(leftOperand, rightOperand);
-                    break;
-
-                case "-":
-                    result = Math.Sub(leftOperand, rightOperand);
-                    break;
-
-                case "*":
-                    result = Math.Mult(leftOperand, rightOperand);
-                    break;
-
-                case "/":
-                    result = Math.Div(leftOperand, rightOperand);
-                    break;
-
-                case "mod":
-                    result = Math.Mod(leftOperand, rightOperand);
-                    break;
-            }
-            
-            return result;
-        }
-
         public static string Estimate()
         {
             var isValid = CheckCurrency();
 
             if (!isValid)
             {
-                // Error.
-                return buffer;
+                return ReturnError();
             }
 
             var result = Format();
 
             if (result[0] == '&')
             {
-                // Error.
-                return buffer;
+                return ReturnError();
             }
 
             bufferStack = CreateStack();
 
+            if (bufferStack.Count > 30)
+            {
+                HandleOvermuchNumbersAndOperatorsError();
+
+                return ReturnError();
+            }
+
             result = RunEstimate();
+
+            if (string.IsNullOrEmpty(Math.lastError))
+            {
+                return ReturnError(Math.lastError);
+            }
 
             return result;
         }
         #endregion
-        
+
         #region Private methods
-        private static SymbolType RecogniseSymbolType(string buffer, int index)
+        private static SymbolType RecogniseSymbolType(string symbols, int index)
         {
-            if (char.IsDigit(buffer[index]))
+            if (char.IsDigit(symbols[index]))
             {
                 return SymbolType.Number;
             }
             else
-            if (IsBinaryOperator(buffer[index]))
+            if (IsBinaryOperator(symbols[index]))
             {
                 return SymbolType.BinaryOperator;
             }
             else
-            if (IsModOperator(buffer, index))
+            if (IsModOperator(symbols, index))
             {
                 return SymbolType.ModOperator;
             }
             else
-            if (IsUnaryOperator(buffer[index]))
+            if (IsUnaryOperator(symbols[index]))
             {
                 return SymbolType.UnaryOperator;
             }
             else
-            if (buffer[index] == '(')
+            if (symbols[index] == '(')
             {
                 return SymbolType.OpeningBracket;
             }
             else
-            if (buffer[index] == ')')
+            if (symbols[index] == ')')
             {
                 return SymbolType.ClosingBracket;
             }
             else
-            if (buffer[index] == ' ')
+            if (symbols[index] == ' ')
             {
                 return SymbolType.Space;
             }
@@ -436,14 +406,26 @@ namespace AnalaizerClass
             return false;
         }
 
+        private static string ReturnError()
+        {
+            return ReturnError(buffer);
+        }
+
+        private static string ReturnError(string error)
+        {
+            return ShowMessage
+                ? error
+                : "Error. For more details contact your administrator.";
+        }
+
         #region Symbol processors
-        private static void ProcessNumberDetected(string buffer, int index, StringBuilder outputBuilder,
+        private static void ProcessNumberDetected(int index, StringBuilder outputBuilder,
             ref SymbolType lastWrittenSymbolType, ref bool isLastSpaceWritten, ref bool isError)
         {
             switch (lastWrittenSymbolType)
             {
                 case SymbolType.Null:
-                    outputBuilder.Append(buffer[index]);
+                    outputBuilder.Append(expression[index]);
 
                     break;
 
@@ -459,7 +441,7 @@ namespace AnalaizerClass
                     }
                     else
                     {
-                        outputBuilder.Append(buffer[index]);
+                        outputBuilder.Append(expression[index]);
 
                         break;
                     }
@@ -472,13 +454,13 @@ namespace AnalaizerClass
                 case SymbolType.ClosingBracket:
                     if (isLastSpaceWritten)
                     {
-                        outputBuilder.Append(buffer[index]);
+                        outputBuilder.Append(expression[index]);
 
                         isLastSpaceWritten = false;
                     }
                     else
                     {
-                        outputBuilder.Append($" {buffer[index]}");
+                        outputBuilder.Append($" {expression[index]}");
                     }
 
                     break;
@@ -487,13 +469,13 @@ namespace AnalaizerClass
             lastWrittenSymbolType = SymbolType.Number;
         }
 
-        private static void ProcessUnaryOperatorDetected(string buffer, int index, StringBuilder outputBuilder,
+        private static void ProcessUnaryOperatorDetected(int index, StringBuilder outputBuilder,
             ref SymbolType lastWrittenSymbolType, ref bool isLastSpaceWritten, ref bool isError)
         {
             switch (lastWrittenSymbolType)
             {
                 case SymbolType.Null:
-                    outputBuilder.Append(buffer[index]);
+                    outputBuilder.Append(expression[index]);
 
                     break;
 
@@ -505,13 +487,13 @@ namespace AnalaizerClass
                 case SymbolType.OpeningBracket:
                     if (isLastSpaceWritten)
                     {
-                        outputBuilder.Append(buffer[index]);
+                        outputBuilder.Append(expression[index]);
 
                         isLastSpaceWritten = false;
                     }
                     else
                     {
-                        outputBuilder.Append($" {buffer[index]}");
+                        outputBuilder.Append($" {expression[index]}");
                     }
 
                     break;
@@ -528,7 +510,7 @@ namespace AnalaizerClass
             lastWrittenSymbolType = SymbolType.UnaryOperator;
         }
 
-        private static void ProcessBinaryOperatorDetected(string buffer, int index, StringBuilder outputBuilder,
+        private static void ProcessBinaryOperatorDetected(int index, StringBuilder outputBuilder,
             ref SymbolType lastWrittenSymbolType, ref bool isLastSpaceWritten, ref bool isError)
         {
             switch (lastWrittenSymbolType)
@@ -545,13 +527,13 @@ namespace AnalaizerClass
                 case SymbolType.ClosingBracket:
                     if (isLastSpaceWritten)
                     {
-                        outputBuilder.Append(buffer[index]);
+                        outputBuilder.Append(expression[index]);
 
                         isLastSpaceWritten = false;
                     }
                     else
                     {
-                        outputBuilder.Append($" {buffer[index]}");
+                        outputBuilder.Append($" {expression[index]}");
                     }
 
                     break;
@@ -578,7 +560,7 @@ namespace AnalaizerClass
             lastWrittenSymbolType = SymbolType.BinaryOperator;
         }
 
-        private static void ProcessModOperatorDetected(string buffer, int index, StringBuilder outputBuilder,
+        private static void ProcessModOperatorDetected(int index, StringBuilder outputBuilder,
             ref SymbolType lastWrittenSymbolType, ref bool isLastSpaceWritten, ref bool isError)
         {
             switch (lastWrittenSymbolType)
@@ -595,13 +577,13 @@ namespace AnalaizerClass
                 case SymbolType.ClosingBracket:
                     if (isLastSpaceWritten)
                     {
-                        outputBuilder.Append(buffer[index]);
+                        outputBuilder.Append(expression[index]);
 
                         isLastSpaceWritten = false;
                     }
                     else
                     {
-                        outputBuilder.Append($" {buffer[index]}");
+                        outputBuilder.Append($" {expression[index]}");
                     }
 
                     break;
@@ -628,13 +610,13 @@ namespace AnalaizerClass
             lastWrittenSymbolType = SymbolType.ModOperator;
         }
 
-        private static void ProcessOpeningBracketDetected(string buffer, int index, StringBuilder outputBuilder,
+        private static void ProcessOpeningBracketDetected(int index, StringBuilder outputBuilder,
             ref SymbolType lastWrittenSymbolType, ref bool isLastSpaceWritten, ref bool isError)
         {
             switch (lastWrittenSymbolType)
             {
                 case SymbolType.Null:
-                    outputBuilder.Append(buffer[index]);
+                    outputBuilder.Append(expression[index]);
 
                     break;
 
@@ -654,13 +636,13 @@ namespace AnalaizerClass
                 case SymbolType.OpeningBracket:
                     if (isLastSpaceWritten)
                     {
-                        outputBuilder.Append(buffer[index]);
+                        outputBuilder.Append(expression[index]);
 
                         isLastSpaceWritten = false;
                     }
                     else
                     {
-                        outputBuilder.Append($" {buffer[index]}");
+                        outputBuilder.Append($" {expression[index]}");
                     }
 
                     break;
@@ -669,7 +651,7 @@ namespace AnalaizerClass
             lastWrittenSymbolType = SymbolType.OpeningBracket;
         }
 
-        private static void ProcessClosingBracketDetected(string buffer, int index, StringBuilder outputBuilder,
+        private static void ProcessClosingBracketDetected(int index, StringBuilder outputBuilder,
             ref SymbolType lastWrittenSymbolType, ref bool isLastSpaceWritten, ref bool isError)
         {
             switch (lastWrittenSymbolType)
@@ -678,13 +660,13 @@ namespace AnalaizerClass
                 case SymbolType.ClosingBracket:
                     if (isLastSpaceWritten)
                     {
-                        outputBuilder.Append(buffer[index]);
+                        outputBuilder.Append(expression[index]);
 
                         isLastSpaceWritten = false;
                     }
                     else
                     {
-                        outputBuilder.Append($" {buffer[index]}");
+                        outputBuilder.Append($" {expression[index]}");
                     }
 
                     break;
@@ -704,7 +686,7 @@ namespace AnalaizerClass
             lastWrittenSymbolType = SymbolType.ClosingBracket;
         }
 
-        private static void ProcessSpaceDetected(string buffer, int index, StringBuilder outputBuilder,
+        private static void ProcessSpaceDetected(int index, StringBuilder outputBuilder,
             SymbolType lastWrittenSymbolType, ref bool isLastSpaceWritten)
         {
             if (isLastSpaceWritten)
@@ -723,7 +705,7 @@ namespace AnalaizerClass
                 case SymbolType.ModOperator:
                 case SymbolType.OpeningBracket:
                 case SymbolType.ClosingBracket:
-                    outputBuilder.Append(buffer[index]);
+                    outputBuilder.Append(expression[index]);
 
                     break;
             }
@@ -786,6 +768,59 @@ namespace AnalaizerClass
             erposition = expression.Length;
 
             buffer = "Error 05 - Незавершений вираз.";
+        }
+        
+        /// <summary>
+        /// Error #8.
+        /// </summary>
+        private static void HandleOvermuchNumbersAndOperatorsError()
+        {
+            // index: expresion.Length, position: expresion.Length.
+            erposition = expression.Length;
+
+            buffer = "Error 08 - Сумарна кількість чисел і операторів перевищує 30.";
+        }
+        #endregion
+
+        #region Operator executors
+        private static int ExecuteUnaryOperator(string element, long input)
+        {
+            // There are only two unary operators: "m" and "p".
+            var result = element == "m"
+                ? Math.IABS(input)
+                : Math.ABS(input);
+
+            return result;
+        }
+
+        private static int ExecuteBinaryOperator(string element, long leftOperand, long rightOperand)
+        {
+            int result = 0;
+
+            switch (element)
+            {
+                case "+":
+                    result = Math.Add(leftOperand, rightOperand);
+                    break;
+
+                case "-":
+                    result = Math.Sub(leftOperand, rightOperand);
+                    break;
+
+                case "*":
+                    result = Math.Mult(leftOperand, rightOperand);
+                    break;
+
+                case "/":
+                    result = Math.Div(leftOperand, rightOperand);
+                    break;
+
+                case "mod":
+                    result = Math.Mod(leftOperand, rightOperand);
+                    break;
+            }
+
+            return result;
         }
         #endregion
         #endregion
