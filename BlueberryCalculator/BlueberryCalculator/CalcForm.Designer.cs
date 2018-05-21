@@ -76,6 +76,7 @@
             this.textBoxResult.Enabled = false;
             this.textBoxResult.Location = new System.Drawing.Point(29, 120);
             this.textBoxResult.Margin = new System.Windows.Forms.Padding(5);
+            this.textBoxResult.MaxLength = 66000;
             this.textBoxResult.Multiline = true;
             this.textBoxResult.Name = "textBoxResult";
             this.textBoxResult.ReadOnly = true;
@@ -359,6 +360,7 @@
             this.buttonMemoryRecall.TabIndex = 23;
             this.buttonMemoryRecall.Text = "MR";
             this.buttonMemoryRecall.UseVisualStyleBackColor = false;
+            this.buttonMemoryRecall.Click += new System.EventHandler(this.buttonMemoryRecall_Click);
             // 
             // buttonMemoryAdd
             // 
@@ -372,6 +374,7 @@
             this.buttonMemoryAdd.TabIndex = 24;
             this.buttonMemoryAdd.Text = "M+";
             this.buttonMemoryAdd.UseVisualStyleBackColor = false;
+            this.buttonMemoryAdd.Click += new System.EventHandler(this.buttonMemoryAdd_Click);
             // 
             // buttonMemoryClear
             // 
@@ -385,6 +388,7 @@
             this.buttonMemoryClear.TabIndex = 25;
             this.buttonMemoryClear.Text = "MC";
             this.buttonMemoryClear.UseVisualStyleBackColor = false;
+            this.buttonMemoryClear.Click += new System.EventHandler(this.buttonMemoryClear_Click);
             // 
             // buttonClear
             // 

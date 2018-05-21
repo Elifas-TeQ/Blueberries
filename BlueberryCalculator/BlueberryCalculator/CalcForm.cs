@@ -14,6 +14,7 @@ namespace BlueberryCalculator
     public partial class CalcForm : Form
     {
         Stopwatch clickTimeSpan = new Stopwatch();
+        int buffer = new Int32();
         public CalcForm()
         {
             InitializeComponent();
@@ -59,7 +60,7 @@ namespace BlueberryCalculator
         {
             foreach (Control c in this.Controls.OfType<TextBox>())
             {
-                c.Text = "";
+                c.Text = null;
             }
         }
 
@@ -92,7 +93,7 @@ namespace BlueberryCalculator
                                 : textBoxExpression.Text.Substring(0, textBoxExpression.Text.Length - 1) + "m";
                         */                
                     }
-                    //clickTimeSpan.Start();
+
                     clickTimeSpan = Stopwatch.StartNew();
                 }
                 else
@@ -114,6 +115,9 @@ namespace BlueberryCalculator
         {
             MessageBox.Show(":P");
 
+            string expression = textBoxExpression.Text.Replace('÷', '/').Replace('×', '*');
+
+
         }
         
         protected override bool ProcessCmdKey(ref Message message, Keys keys)
@@ -133,15 +137,40 @@ namespace BlueberryCalculator
             }
             return base.ProcessCmdKey(ref message, keys);
         }
-        
-        /*
-         private void CalcForm_KeyDown(object sender, KeyEventArgs e)
+
+        private void buttonMemoryRecall_Click(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Escape)
+            if (buffer == 0)
+                MessageBox.Show("Buffer is empty. Use M+ to add the result to memory");
+            else
             {
-                this.Close();
+                textBoxExpression.Text += buffer;
             }
+
         }
-         */
+
+        private void buttonMemoryClear_Click(object sender, EventArgs e)
+        {
+            buffer = 0;
+        }
+
+        private void buttonMemoryAdd_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBoxResult.Text))
+            {
+                if (textBoxResult.Text.Contains("Error"))
+                    textBoxResult.Text = "Error: cannot be converted to a number";
+                else
+                {
+                    //Lion's calculation
+                    //buffer = MethodAddingTwoNumber(textBoxResult.Text + buffer)
+                }
+            }
+            else
+                MessageBox.Show("The field of result is empty. Nothing to add. Memory contained " + buffer);
+            // залишати в буфері старе число? тобто якщо пусте поле результату, але
+            // є число в буфері, то робити буфер + 0 ????
+        }
+
     }
 }
