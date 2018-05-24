@@ -61,11 +61,12 @@
             this.textBoxExpression.BackColor = System.Drawing.Color.LightSteelBlue;
             this.textBoxExpression.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxExpression.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxExpression.Location = new System.Drawing.Point(29, 19);
+            this.textBoxExpression.Location = new System.Drawing.Point(29, 27);
             this.textBoxExpression.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxExpression.MaxLength = 66000;
             this.textBoxExpression.Multiline = true;
             this.textBoxExpression.Name = "textBoxExpression";
+            this.textBoxExpression.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxExpression.Size = new System.Drawing.Size(314, 102);
             this.textBoxExpression.TabIndex = 0;
             this.textBoxExpression.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -74,13 +75,14 @@
             // 
             this.textBoxResult.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxResult.Enabled = false;
-            this.textBoxResult.Location = new System.Drawing.Point(29, 120);
+            this.textBoxResult.Location = new System.Drawing.Point(29, 129);
             this.textBoxResult.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxResult.MaxLength = 66000;
             this.textBoxResult.Multiline = true;
             this.textBoxResult.Name = "textBoxResult";
             this.textBoxResult.ReadOnly = true;
-            this.textBoxResult.Size = new System.Drawing.Size(314, 51);
+            this.textBoxResult.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBoxResult.Size = new System.Drawing.Size(314, 70);
             this.textBoxResult.TabIndex = 1;
             this.textBoxResult.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -90,7 +92,7 @@
             this.buttonZero.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.buttonZero.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonZero.Font = new System.Drawing.Font("Century Gothic", 15F);
-            this.buttonZero.Location = new System.Drawing.Point(109, 462);
+            this.buttonZero.Location = new System.Drawing.Point(109, 499);
             this.buttonZero.Name = "buttonZero";
             this.buttonZero.Size = new System.Drawing.Size(74, 49);
             this.buttonZero.TabIndex = 3;
@@ -103,7 +105,7 @@
             this.buttonNegate.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.buttonNegate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonNegate.Font = new System.Drawing.Font("Century Gothic", 15F);
-            this.buttonNegate.Location = new System.Drawing.Point(29, 462);
+            this.buttonNegate.Location = new System.Drawing.Point(29, 499);
             this.buttonNegate.Name = "buttonNegate";
             this.buttonNegate.Size = new System.Drawing.Size(74, 49);
             this.buttonNegate.TabIndex = 4;
@@ -117,7 +119,7 @@
             this.buttonMod.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.buttonMod.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonMod.Font = new System.Drawing.Font("Century Gothic", 13F);
-            this.buttonMod.Location = new System.Drawing.Point(189, 463);
+            this.buttonMod.Location = new System.Drawing.Point(189, 500);
             this.buttonMod.Name = "buttonMod";
             this.buttonMod.Size = new System.Drawing.Size(74, 49);
             this.buttonMod.TabIndex = 5;
@@ -131,7 +133,7 @@
             this.buttonEqual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonEqual.Font = new System.Drawing.Font("Century Gothic", 15F);
             this.buttonEqual.ForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.buttonEqual.Location = new System.Drawing.Point(269, 463);
+            this.buttonEqual.Location = new System.Drawing.Point(269, 500);
             this.buttonEqual.Name = "buttonEqual";
             this.buttonEqual.Size = new System.Drawing.Size(74, 49);
             this.buttonEqual.TabIndex = 6;
@@ -145,7 +147,7 @@
             this.buttonOne.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.buttonOne.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOne.Font = new System.Drawing.Font("Century Gothic", 15F);
-            this.buttonOne.Location = new System.Drawing.Point(29, 407);
+            this.buttonOne.Location = new System.Drawing.Point(29, 444);
             this.buttonOne.Name = "buttonOne";
             this.buttonOne.Size = new System.Drawing.Size(74, 49);
             this.buttonOne.TabIndex = 7;
@@ -158,7 +160,7 @@
             this.buttonTwo.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.buttonTwo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonTwo.Font = new System.Drawing.Font("Century Gothic", 15F);
-            this.buttonTwo.Location = new System.Drawing.Point(109, 407);
+            this.buttonTwo.Location = new System.Drawing.Point(109, 444);
             this.buttonTwo.Name = "buttonTwo";
             this.buttonTwo.Size = new System.Drawing.Size(74, 49);
             this.buttonTwo.TabIndex = 8;
@@ -171,7 +173,7 @@
             this.buttonThree.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.buttonThree.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonThree.Font = new System.Drawing.Font("Century Gothic", 15F);
-            this.buttonThree.Location = new System.Drawing.Point(189, 408);
+            this.buttonThree.Location = new System.Drawing.Point(189, 445);
             this.buttonThree.Name = "buttonThree";
             this.buttonThree.Size = new System.Drawing.Size(74, 49);
             this.buttonThree.TabIndex = 9;
@@ -184,7 +186,7 @@
             this.buttonPlus.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.buttonPlus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonPlus.Font = new System.Drawing.Font("Century Gothic", 15F);
-            this.buttonPlus.Location = new System.Drawing.Point(269, 407);
+            this.buttonPlus.Location = new System.Drawing.Point(269, 444);
             this.buttonPlus.Name = "buttonPlus";
             this.buttonPlus.Size = new System.Drawing.Size(74, 49);
             this.buttonPlus.TabIndex = 10;
@@ -197,7 +199,7 @@
             this.buttonFour.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.buttonFour.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonFour.Font = new System.Drawing.Font("Century Gothic", 15F);
-            this.buttonFour.Location = new System.Drawing.Point(29, 352);
+            this.buttonFour.Location = new System.Drawing.Point(29, 389);
             this.buttonFour.Name = "buttonFour";
             this.buttonFour.Size = new System.Drawing.Size(74, 49);
             this.buttonFour.TabIndex = 11;
@@ -210,7 +212,7 @@
             this.buttonFive.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.buttonFive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonFive.Font = new System.Drawing.Font("Century Gothic", 15F);
-            this.buttonFive.Location = new System.Drawing.Point(109, 352);
+            this.buttonFive.Location = new System.Drawing.Point(109, 389);
             this.buttonFive.Name = "buttonFive";
             this.buttonFive.Size = new System.Drawing.Size(74, 49);
             this.buttonFive.TabIndex = 12;
@@ -223,7 +225,7 @@
             this.buttonSix.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.buttonSix.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSix.Font = new System.Drawing.Font("Century Gothic", 15F);
-            this.buttonSix.Location = new System.Drawing.Point(189, 352);
+            this.buttonSix.Location = new System.Drawing.Point(189, 389);
             this.buttonSix.Name = "buttonSix";
             this.buttonSix.Size = new System.Drawing.Size(74, 49);
             this.buttonSix.TabIndex = 13;
@@ -236,7 +238,7 @@
             this.buttonMinus.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.buttonMinus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonMinus.Font = new System.Drawing.Font("Century Gothic", 15F);
-            this.buttonMinus.Location = new System.Drawing.Point(269, 352);
+            this.buttonMinus.Location = new System.Drawing.Point(269, 389);
             this.buttonMinus.Name = "buttonMinus";
             this.buttonMinus.Size = new System.Drawing.Size(74, 49);
             this.buttonMinus.TabIndex = 14;
@@ -249,7 +251,7 @@
             this.buttonSeven.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.buttonSeven.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSeven.Font = new System.Drawing.Font("Century Gothic", 15F);
-            this.buttonSeven.Location = new System.Drawing.Point(29, 297);
+            this.buttonSeven.Location = new System.Drawing.Point(29, 334);
             this.buttonSeven.Name = "buttonSeven";
             this.buttonSeven.Size = new System.Drawing.Size(74, 49);
             this.buttonSeven.TabIndex = 15;
@@ -262,7 +264,7 @@
             this.buttonEight.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.buttonEight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonEight.Font = new System.Drawing.Font("Century Gothic", 15F);
-            this.buttonEight.Location = new System.Drawing.Point(109, 297);
+            this.buttonEight.Location = new System.Drawing.Point(109, 334);
             this.buttonEight.Name = "buttonEight";
             this.buttonEight.Size = new System.Drawing.Size(74, 49);
             this.buttonEight.TabIndex = 16;
@@ -275,7 +277,7 @@
             this.buttonNine.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.buttonNine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonNine.Font = new System.Drawing.Font("Century Gothic", 15F);
-            this.buttonNine.Location = new System.Drawing.Point(189, 297);
+            this.buttonNine.Location = new System.Drawing.Point(189, 334);
             this.buttonNine.Name = "buttonNine";
             this.buttonNine.Size = new System.Drawing.Size(74, 49);
             this.buttonNine.TabIndex = 17;
@@ -288,7 +290,7 @@
             this.buttonMultiply.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.buttonMultiply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonMultiply.Font = new System.Drawing.Font("Century Gothic", 15F);
-            this.buttonMultiply.Location = new System.Drawing.Point(269, 297);
+            this.buttonMultiply.Location = new System.Drawing.Point(269, 334);
             this.buttonMultiply.Name = "buttonMultiply";
             this.buttonMultiply.Size = new System.Drawing.Size(74, 49);
             this.buttonMultiply.TabIndex = 18;
@@ -301,7 +303,7 @@
             this.buttonDivide.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.buttonDivide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonDivide.Font = new System.Drawing.Font("Century Gothic", 15F);
-            this.buttonDivide.Location = new System.Drawing.Point(269, 242);
+            this.buttonDivide.Location = new System.Drawing.Point(269, 279);
             this.buttonDivide.Name = "buttonDivide";
             this.buttonDivide.Size = new System.Drawing.Size(74, 49);
             this.buttonDivide.TabIndex = 19;
@@ -314,7 +316,7 @@
             this.buttonBackspace.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.buttonBackspace.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonBackspace.Font = new System.Drawing.Font("Century Gothic", 15F);
-            this.buttonBackspace.Location = new System.Drawing.Point(29, 241);
+            this.buttonBackspace.Location = new System.Drawing.Point(29, 278);
             this.buttonBackspace.Name = "buttonBackspace";
             this.buttonBackspace.Size = new System.Drawing.Size(74, 49);
             this.buttonBackspace.TabIndex = 20;
@@ -328,7 +330,7 @@
             this.buttonCloseParenthesis.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.buttonCloseParenthesis.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonCloseParenthesis.Font = new System.Drawing.Font("Century Gothic", 13F);
-            this.buttonCloseParenthesis.Location = new System.Drawing.Point(189, 242);
+            this.buttonCloseParenthesis.Location = new System.Drawing.Point(189, 279);
             this.buttonCloseParenthesis.Name = "buttonCloseParenthesis";
             this.buttonCloseParenthesis.Size = new System.Drawing.Size(74, 49);
             this.buttonCloseParenthesis.TabIndex = 21;
@@ -341,7 +343,7 @@
             this.buttonOpenParenthesis.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.buttonOpenParenthesis.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOpenParenthesis.Font = new System.Drawing.Font("Century Gothic", 13F);
-            this.buttonOpenParenthesis.Location = new System.Drawing.Point(109, 242);
+            this.buttonOpenParenthesis.Location = new System.Drawing.Point(109, 279);
             this.buttonOpenParenthesis.Name = "buttonOpenParenthesis";
             this.buttonOpenParenthesis.Size = new System.Drawing.Size(74, 49);
             this.buttonOpenParenthesis.TabIndex = 22;
@@ -354,7 +356,7 @@
             this.buttonMemoryRecall.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.buttonMemoryRecall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonMemoryRecall.Font = new System.Drawing.Font("Century Gothic", 10F);
-            this.buttonMemoryRecall.Location = new System.Drawing.Point(109, 193);
+            this.buttonMemoryRecall.Location = new System.Drawing.Point(109, 230);
             this.buttonMemoryRecall.Name = "buttonMemoryRecall";
             this.buttonMemoryRecall.Size = new System.Drawing.Size(74, 37);
             this.buttonMemoryRecall.TabIndex = 23;
@@ -368,7 +370,7 @@
             this.buttonMemoryAdd.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.buttonMemoryAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonMemoryAdd.Font = new System.Drawing.Font("Century Gothic", 10F);
-            this.buttonMemoryAdd.Location = new System.Drawing.Point(189, 193);
+            this.buttonMemoryAdd.Location = new System.Drawing.Point(189, 230);
             this.buttonMemoryAdd.Name = "buttonMemoryAdd";
             this.buttonMemoryAdd.Size = new System.Drawing.Size(74, 37);
             this.buttonMemoryAdd.TabIndex = 24;
@@ -382,7 +384,7 @@
             this.buttonMemoryClear.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.buttonMemoryClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonMemoryClear.Font = new System.Drawing.Font("Century Gothic", 10F);
-            this.buttonMemoryClear.Location = new System.Drawing.Point(269, 193);
+            this.buttonMemoryClear.Location = new System.Drawing.Point(269, 230);
             this.buttonMemoryClear.Name = "buttonMemoryClear";
             this.buttonMemoryClear.Size = new System.Drawing.Size(74, 37);
             this.buttonMemoryClear.TabIndex = 25;
@@ -396,7 +398,7 @@
             this.buttonClear.FlatAppearance.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.buttonClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonClear.Font = new System.Drawing.Font("Century Gothic", 12F);
-            this.buttonClear.Location = new System.Drawing.Point(29, 193);
+            this.buttonClear.Location = new System.Drawing.Point(29, 230);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(74, 37);
             this.buttonClear.TabIndex = 26;
@@ -409,7 +411,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSlateBlue;
-            this.ClientSize = new System.Drawing.Size(373, 536);
+            this.ClientSize = new System.Drawing.Size(373, 577);
             this.Controls.Add(this.buttonClear);
             this.Controls.Add(this.buttonMemoryClear);
             this.Controls.Add(this.buttonMemoryAdd);
