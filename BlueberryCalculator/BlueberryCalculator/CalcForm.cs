@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using AnalaizerClass;
+using System;
 using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BlueberryCalculator
@@ -113,11 +108,15 @@ namespace BlueberryCalculator
 
         private void buttonEqual_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(":P");
+            //MessageBox.Show(":P");
 
             string expression = textBoxExpression.Text.Replace('÷', '/').Replace('×', '*');
 
+            Brain.expression = expression;
 
+            var result = Brain.Estimate();
+
+            textBoxResult.Text = result;
         }
         
         protected override bool ProcessCmdKey(ref Message message, Keys keys)
@@ -162,6 +161,11 @@ namespace BlueberryCalculator
                     textBoxResult.Text = "Error: cannot be converted to a number";
                 else
                 {
+                    long result;
+                    if (long.TryParse(textBoxResult.Text, out result))
+                    {
+                        buffer = CalcClass.Math.Add(result, buffer);
+                    }
                     //Lion's calculation
                     //buffer = MethodAddingTwoNumber(textBoxResult.Text + buffer)
                 }

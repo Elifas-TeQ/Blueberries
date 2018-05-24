@@ -180,20 +180,28 @@ namespace AnalaizerClass
                 int tokenOperatorPriority;
                 if(IsOperator(tokens[i], out tokenOperatorPriority))
                 {
-                    int stackOperatorPriority;
-                    while(IsOperator(stack.Peek(), out stackOperatorPriority))
+                    if (stack.Count > 0 && stack.Peek() != "(")
                     {
-                        if (stackOperatorPriority > tokenOperatorPriority)
+                        int stackOperatorPriority;
+                        while (IsOperator(stack.Peek(), out stackOperatorPriority))
                         {
-                            stack.Push(tokens[i]);
+                            if (stackOperatorPriority > tokenOperatorPriority)
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                output.Add(stack.Pop());
 
-                            break;
-                        }
-                        else
-                        {
-                            output.Add(stack.Pop());
+                                if (stack.Count < 1)
+                                {
+                                    break;
+                                }
+                            }
                         }
                     }
+
+                    stack.Push(tokens[i]);
 
                     continue;
                 }
@@ -216,7 +224,7 @@ namespace AnalaizerClass
                 }
             }
 
-            if (stack.Count > 0)
+            while (stack.Count > 0)
             {
                 output.Add(stack.Pop());
             }
@@ -287,7 +295,7 @@ namespace AnalaizerClass
 
             result = RunEstimate();
 
-            if (string.IsNullOrEmpty(Math.lastError))
+            if (!string.IsNullOrEmpty(Math.lastError))
             {
                 return ReturnError(Math.lastError);
             }
@@ -350,7 +358,7 @@ namespace AnalaizerClass
         private static bool IsModOperator(string symbols, int index)
         {
             var isModOperator = symbols.Length > index + 2
-                && buffer.Substring(index, 3) == "mod";
+                && symbols.Substring(index, 3) == "mod";
 
             return isModOperator;
         }
@@ -451,7 +459,6 @@ namespace AnalaizerClass
                 case SymbolType.BinaryOperator:
                 case SymbolType.ModOperator:
                 case SymbolType.OpeningBracket:
-                case SymbolType.ClosingBracket:
                     if (isLastSpaceWritten)
                     {
                         outputBuilder.Append(expression[index]);
@@ -464,6 +471,14 @@ namespace AnalaizerClass
                     }
 
                     break;
+
+
+                case SymbolType.ClosingBracket:
+                    HandleWrongSyntacticConstructionError(index);
+
+                    isError = true;
+
+                    return;
             }
 
             lastWrittenSymbolType = SymbolType.Number;
@@ -577,13 +592,13 @@ namespace AnalaizerClass
                 case SymbolType.ClosingBracket:
                     if (isLastSpaceWritten)
                     {
-                        outputBuilder.Append(expression[index]);
+                        outputBuilder.Append("mod");
 
                         isLastSpaceWritten = false;
                     }
                     else
                     {
-                        outputBuilder.Append($" {expression[index]}");
+                        outputBuilder.Append($" mod");
                     }
 
                     break;

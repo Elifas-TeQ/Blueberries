@@ -31,7 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CalcClass">
-      <HintPath>Libraries\CalcClass.dll</HintPath>
+      <HintPath>.\CalcClass.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

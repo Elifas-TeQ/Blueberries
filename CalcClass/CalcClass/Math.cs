@@ -69,6 +69,8 @@ namespace CalcClass
         #region Private methods
         private static int HandleUnaryOperation(long a, Func<long> operation)
         {
+            _lastError = string.Empty;
+
             var isError = !CheckWhetherNumberIsInIntegerRange(a, false);
 
             if (isError)
@@ -85,6 +87,8 @@ namespace CalcClass
 
         private static int HandleBinaryOperation(long a, long b, Func<long> operation)
         {
+            _lastError = string.Empty;
+
             var isError = !CheckWhetherNumberIsInIntegerRange(a) || !CheckWhetherNumberIsInIntegerRange(b);
 
             if (isError)
