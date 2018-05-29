@@ -15,13 +15,15 @@ namespace BlueberryCalculator
         {
             if (args.Length > 0)
             {
-                NativeMethods.AllocConsole();
+                ConsoleApiFunction.AllocConsole();
 
                 Brain.expression = args[0];
 
                 var result = Brain.Estimate();
 
-                Console.WriteLine(result);
+                Console.WriteLine("Input:\t\t{0}", args[0]);
+
+                Console.WriteLine("Output:\t\t{0}", result);
 
                 Console.ReadKey();
             }
@@ -36,9 +38,9 @@ namespace BlueberryCalculator
         }
     }
 
-    internal static class NativeMethods
+    internal static class ConsoleApiFunction
     {
         [DllImport("kernel32.dll")]
-        internal static extern Boolean AllocConsole();
+        internal static extern bool AllocConsole();
     }
 }
