@@ -20,6 +20,13 @@ namespace AnalaizerClass
         #region Public methods
         public static bool CheckCurrency()
         {
+            if (expression.Length > 65536)
+            {
+                HandleOverlongExpressionError();
+
+                return false;
+            }
+
             var bracketsAccordanceCounter = 0;
 
             for (int i = 0; i < expression.Length; i++)
@@ -53,7 +60,7 @@ namespace AnalaizerClass
 
             if (bracketsAccordanceCounter != 0)
             {
-                HandleIncompleteExpression();
+                HandleIncompleteExpressionError();
 
                 return false;
             }
@@ -149,7 +156,7 @@ namespace AnalaizerClass
                 || lastWrittenSymbolType == SymbolType.BinaryOperator
                 || lastWrittenSymbolType == SymbolType.ModOperator)
             {
-                HandleIncompleteExpression();
+                HandleIncompleteExpressionError();
 
                 return string.Format("&{0}", buffer);
             }
@@ -777,14 +784,25 @@ namespace AnalaizerClass
         /// <summary>
         /// Error #5.
         /// </summary>
-        private static void HandleIncompleteExpression()
+        private static void HandleIncompleteExpressionError()
         {
             // index: expresion.Length, position: expresion.Length.
             erposition = expression.Length;
 
             buffer = "Error 05 - Незавершений вираз.";
         }
-        
+
+        /// <summary>
+        /// Error #7.
+        /// </summary>
+        private static void HandleOverlongExpressionError()
+        {
+            // index: expresion.Length, position: expresion.Length.
+            erposition = expression.Length;
+
+            buffer = "Error 07 - Дуже довгий вираз. Максмальна довжина - 65536 символів.";
+        }
+
         /// <summary>
         /// Error #8.
         /// </summary>
