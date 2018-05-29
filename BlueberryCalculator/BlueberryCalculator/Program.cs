@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AnalaizerClass;
+using System;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace BlueberryCalculator
@@ -9,13 +11,34 @@ namespace BlueberryCalculator
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            //TODO: Run the form of calculator below.
-            //Application.Run(/* new CalculatorForm() */);
-            Application.Run(new CalcForm());
+            if (args.Length > 0)
+            {
+                NativeMethods.AllocConsole();
+
+                Brain.expression = args[0];
+
+                var result = Brain.Estimate();
+
+                Console.WriteLine(result);
+
+                Console.ReadKey();
+            }
+            else
+            {
+                Application.EnableVisualStyles();
+
+                Application.SetCompatibleTextRenderingDefault(false);
+
+                Application.Run(new CalcForm());
+            }
         }
+    }
+
+    internal static class NativeMethods
+    {
+        [DllImport("kernel32.dll")]
+        internal static extern Boolean AllocConsole();
     }
 }
